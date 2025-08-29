@@ -1,0 +1,128 @@
+
+
+:: main [stylesheet]
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+
+.bw {
+    font-family: 'Noto Sans Symbols 2', 'Segoe UI Symbol', 'Symbola', sans-serif;
+
+    filter: grayscale(100%) brightness(0); /* force black */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+body {background-color: #005079;
+	background: url(./img/tokyo_saturation.jpg) no-repeat center center fixed;
+	background-size: cover;
+	font-size: 170%;
+
+	font-family: "Bitcount Prop Single";
+  /*  user-select: none */}
+
+body.nobg {background-image: none; background-color: black}
+
+body.sbg {background-image: url(./img/sewer.jpg)}
+.sbg a {color: #df9c46}
+.sbg a:hover {color: gold}
+
+.passage {background-color: black; padding: 30px; width: 90%; border-radius: 15px}
+
+#command {background-color: #343434}
+
+input {
+  border: none; 
+
+}
+
+input:focus {
+  outline: none; 
+  border: none;  
+  box-shadow: none;
+}
+
+
+b {
+  font-weight: normal;
+font-family: "Bitcount Prop Double";
+}
+
+a {color: white; font-family: "Bitcount Prop Double"; color: aqua}
+a:hover {color: orange; text-decoration: none}
+
+#footnote {color: #bebebe; font-size: 18pt}
+
+a.macro-cycle {color: #39FF14;}
+a.macro-cycle:hover {color: orange; text-decoration: none}
+
+.deadlink {font-family: "Bitcount Prop Double"}
+
+img.tv {
+  border-radius: 12px; /* Adjust the value as needed */
+}
+
+#status {background-color: #00ffffa8;
+backdrop-filter: blur(16px);
+  position: fixed;
+  bottom: 2px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  color: black;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: left}
+
+
+.moreinv {color: black; padding-left: 10px; padding-right: 10px; border: 3px dashed transparent; border-radius: 5px; margin-right: 20px; float: right; background-color: #0aa; position: fixed;   right: 0; bottom: 6px;
+  z-index: 100}
+
+.sbg > .moreinv {background-color: #a6846b !important}
+
+.devbar {font-size: 50%; background-color: #e6e6e6; border-bottom: 1px solid grey; position: fixed; top: 0; left: 0; width: 100%; color: black}
+.devbar a {color: #4775a5}
+
+input, input:active, input:hover, input:enabled {border: 2px solid aqua; border-radius: 15px; background-color: black !important; font-family: 'JetBrains Mono'}
+
+span.codenum, span.codenum > a {font-family: 'JetBrains Mono' !important}
+
+
+
+
+
+button {background-color: black !important; border: 2px solid aqua !important; border-radius: 10px; text-transform: uppercase !important} 
+button:hover {background-color: aqua !important}
+
+#ui-dialog-title {background-color: black; display: none} 
+
+#ui-dialog {background-color: black; border-radius: 10px}
+#ui-dialog {box-shadow: 2px 2px 100px #ffffff30}  
+
+
+#ui-dialog-titlebar {background-color: aqua; border-radius: 10px 10px 0px 0px; height: 55px}
+
+#ui-dialog-body {background-color: black !important; border-radius: 0px 0px 10px 10px}
+
+.datestamp {display: none}
+
+#ui-dialog-close:hover {background-color: purple !important}
+
+#ui-dialog > * {border: none !important;}
+#ui-dialog > * tr {border: none !important;}
+#ui-dialog ul.buttons {border: none !important;}
+
+#saves-clear {display: none}
+
+#passages {margin-bottom: 200px}
+

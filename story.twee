@@ -1,0 +1,1617 @@
+
+:: StoryData
+{
+	"ifid": "AF58D901-97B5-4B6C-A01C-0D41CA300F1F"
+}
+
+:: StoryTitle
+The Kidnapping of Kenji Eno
+
+
+
+
+
+
+:: Start
+
+<div style="text-align: center; font-size: 200%">The Kidnapping of Kenji Eno</div>
+
+<div style="text-align:  center">A Docufabulation About the Life and Work of Japan's Rebel Game Deisgner<<br>>
+[[New Game|Start2a]]<br>
+<<link "Continue">> <<script>>UI.saves();<</script>><</link>><br>
+[[Credits]]<<br>>
+[[Content Note|https://pbparjeter2.github.io/h/content_note.html]]
+</div>
+
+<style>
+.save {display: none !important}
+#saves-export {display: none !important}
+</style>
+
+
+
+
+:: Credits
+[[<< Go back.|Start]]<<br>>
+
+Thank you to all beta testers<<br>>
+Although this game is fiction, much of the dialogue spoken by Kenji Eno in-game is paraphrased closely from real interviews <<br>>
+Stock images are from Pixabay and Unsplash (no attribution needed). Other images belong to the rights holders or secondary websites
+<<br>>
+Some images have been modified with [[Photomosh|https://github.com/kugeceo/photomosh.luhui.net]] <<br>>
+If you'd like help sourcing a particular interview or image, please contact [[pbparjeter@protonmail.com|mailto:pbparjeter@protonmail.com]]  or [[pbparjeter on intfiction.org|https://intfiction.org/u/pbparjeter/]]<<br>>
+
+[[<< Go back.|Start]]
+
+:: PassageHeader
+
+<<if $turtlePos eq "held" or $turtlePos eq "table">>
+	<<set $turtleFound to false>>
+<<endif>>
+
+<<if $garbSteps lte $maxGarb or $garbSteps gte 1>>
+	<<set $garbSteps -= 1>>
+<<endif>>
+
+<<if $garbSteps lte 0>>
+	<<set $garbSteps to 0>>
+		<<set $qGarbSet to "grinding">>
+<<endif>>
+
+
+
+
+
+
+
+
+:: PassageFooter
+
+<<set $devmode to true>>
+<<if $devmode eq true>>
+
+	<span class="devbar">
+ <b>nextExp</b>: <<print $nextExp>>;
+	<b>turtlePos: <<print $turtlePos>> ;</b>
+		<b>turtleHeld: <<print $turtleHeld>> ;</b>
+	<b>turtleFound: <<print $turtleFound>>  ; </b>
+	<b>qStoolPos: <<print $qStoolPos>></b> ;
+	<b>qCupboardPos: <<print $qCupboardPos>></b> ;
+	<b>qFridgePos: <<print $qFridgePos>></b>;
+	<b>qGarbSet: <<print $qGarbSet>></b>;
+		<b>qFridgePower: <<print $qFridgePower>></b>;
+	<b>garbSteps: <<print $garbSteps>></b>;
+
+	<b>maxGarb: <<print $maxGarb>></b>;
+	
+<b>qStoveSet: <<print $qStoveSet>></b>;
+<b>qSinkClog: <<print $qSinkClog>></b>;
+
+[[Start5]] [[core1]]
+[[interro6]]  [[exp1]]   [[exp1e]] | [[exp2]] [[exp2d]]| |  [[exp3]] | [[exp4]] [[exp4h]] [[bathroom]] [[balcony]]  | [[exp5]] [[exp5f]] | [[tmnt1]] [[tmnt12]] [[turtleking5]] | [[marcoded1]] [[marcoded6]] [[elevator]] [[street3]] | [[elevatorcheck]] | [[core2]] [[towers]]  | [[sewerhub]] [[tmnt0]] [[turtleking9]] [[elevator]] [[street5]] [[streetlevel]]
+
+	</span>
+<<endif>>
+
+<<if $gamefinished neq true>>
+
+	<<if !tags().includes("nobg") and !tags().includes("sbg")>>
+		<<if $turtleFound eq true or $turtlePos eq "held">>
+			<span id="status">
+				<<if $turtleFound eq true and $turtlePos neq "table" and $turtlePos neq "held">> You know the turtle is near the <<print $turtlePos>>. 
+				<<elseif $turtlePos eq "held">> You are carrying the turtle.
+				<<else>>
+				...
+
+				<<endif>>
+			</span>
+		<<endif>>
+	<<endif>>
+
+
+	<<if !tags().includes("nobg")>>
+		<<if $yKeyGot  or $yPlungerGot  or  $yBladeGot  or $yIceGot  or $yIceGot or $garbSteps gt 0>>
+			<span class="moreinv">
+					<<if $yKeyGot eq true>><span class="bw" title="You have a key">&#x1F511;&#xFE0E;</span><<endif>>
+					<<if $yPlungerGot eq true>><span class="bw" title="You have a plunger">&#x1FAA0;&#xFE0E;</span><<endif>>
+					<<if $yBladeGot>><span class="bw" title="You have a fan blade">&#x168D8;&#xFE0E;</span><<endif>>
+					<<if $yIceGot>><span class="bw" title="You have a giant ice cube">&#129482;&#xFE0E;</span><<endif>>
+					<<if $garbSteps gt 0>><span class="bw" title="The garburator blades are off"> <<if $yKeyGot  or $yPlungerGot  or  $yBladeGot  or $yIceGot  or $yIceGot>> ⋮ <<endif>> &#x231B;&#xFE0E; <<print $garbSteps>></span><<endif>>
+
+			</span>
+		<<endif>>
+	<<endif>>
+
+<<endif>>
+
+
+
+:: StoryInit
+
+<<set $maxGarb to 6>>
+<<set $turtlePos to "nowhere">>
+<<set $turtleFound to false>>
+<<set $qCupboardPos to "closed">>
+<<set $qGarbSet to "grinding">>
+<<set $qStoolPos to "window">>
+<<set $qStoveSet to "on">>
+<<set $qSinkClog to true>>
+<<set $qToiletStance to "look at it">>
+<<set $qFridgePower to "off">>
+<<set $pass1 to "T0R77">>
+<<set $pass2 to "7015E">>
+<<set $pass3 to "5H377">>
+<<set $garbSteps to 0>>
+
+
+:: Start2a
+
+<<bb "July 31, 2002">><<br>>
+
+It's the day of the big job.<<br>>
+
+You're standing outside Tokyo's tallest office building. Next to you is your illegally parked maintenance van and getaway vehicle.<<br>>
+
+Also next to you is your brother, [[Marco|Start2b]].<<br>>
+
+
+:: Start2b  
+
+ 'Get your ★★★ moving, Lorenzo,' Marco says as he lugs a five-hundred-pound bag of kidnapping paraphernalia. 'I want to get this job over with.'<<br>>
+
+You wince as he pushes you toward the [[revolving doors|Start2c]]. <<br>>
+
+:: Start2c
+
+Through the lobby it's a straight shot to the [[glass elevator|Start3]].<<br>>
+
+From there you're headed to the penthouse offices on (gulp) the top floor.
+
+:: Start3 
+
+
+
+You're in the elevator -- the glass elevator.<<br>>
+
+'What the ★★★★ are you waiting for, Lorenzo?' says Marco. 'The elevator buttons aren't going to push themselves.'<<br>>
+
+With your paralzying fear of heights ... it would be easier if you <<fade "didn't look" "Start4" 2000>>.<<br>>
+
+:: Start4
+
+While you weren't looking, Marco pushed the elevator button. Despite the inconvenience of his five-hundred-pound sack.<<br>>
+
+'And you're ★★★★★★★ welcome,' he says.<<br>>
+
+The [[penthouse office|Start5]] is down the hall.
+
+
+
+:: Start5
+
+Marco puts his ear to the door and motions to you.<<br>>
+
+You [[kick it|core1]] down as gently as possible.<<br>>
+
+:: core1
+
+<<if visited() lte 1>>'Tie him up! Tie him up!' Marco screams.<<br>>
+
+Five hundred pounds of rope and duct tape later, you have indeed tied up the prolific video game developer Kenji Eno. You're fully prepared to have him surrender the source code for his cancelled video game, <b>Spy Lunch.</b><<br>>
+
+Kenji Eno [[towers in front of you|towers]] even though he's tied down.<<br>>
+
+<<else>>
+
+You're all seated in Kenji Eno's studio.<<br>>
+You've looked at the man himself for longer than is comfortable or polite.<<br>>
+
+You turn your attention to the low table separating the three of you.
+
+	<<if $initurtVisited eq true and $pcVisited eq true and $mushroomVisited eq true>> There's a turtle on top of it. And a plate of shiitake mushrooms and a portable computer.  <<br>> <<else>>  There's a [[turtle]] on top of it, a plate of [[shiitake mushrooms|shiitake]] and a [[portable computer]].  <<br>> <<endif>>
+
+<<endif>>
+
+<<if $initurtVisited eq true and $pcVisited eq true and $mushroomVisited eq true>> Marco [[clears his throat|interro]].<<endif>>
+
+
+:: towers
+
+Kenji Eno simply is very large and very tall. He's also wearing a few layers of loose-fitting clothing that make him seem even larger.<<br>>
+
+<img class='tv'  src='./img/kenjieno_small.gif' draggable='false'> <br>
+
+Your handiwork in tying down such a gentle giant could be compared to <b>Gulliver's Travels.</b> Kenji Eno doesn't make the comparison because his mouth is duct taped. You don't make the comparison because you're not here for literary allusions.<<br>>
+You're here for his cancelled video game. <b>[[Spy Lunch|core1]].</b>
+
+:: turtle
+
+'Nice turtle you got there. Shame if something should happen to it,' Marco says.<<br>>
+<img class='tv'  src='./img/turtlecrt.gif' draggable='false'> <br>
+
+'Don't hurt it,' Kenji Eno says through the duct tape covering his mouth.<<br>>
+
+'Wouldn't dream of it ... but my brother Lorenzo here, he's clumsy.'<<br>>
+
+
+
+'[[Clumsy?|turtle2]]'
+
+:: turtle2
+
+'Yeah. Clumsy. He's got two left feet. Say he takes a wrong step and kicks the turtle clear across the room. You're clumsy like that. Ain't that right, Lorenzo?'<<br>>
+'I wouldn't say that,' you say, as you [[scuff your foot|turtle3]] bashfully. <<br>>
+
+:: turtle3
+
+'So let's make sure that don't happen, okay Mr. Eno?'<<br>>
+
+Kenji Eno doesn't say anything.<<br>>
+
+Marco [[turns to you|turtle4]].
+
+:: turtle4
+
+'Keep an eye on the ★★★★ turtle,' Marco whispers loudly. 'You know what those things can do to a man. I don't want that ★★★★★★★ thing out of my sight.'<<br>>
+
+You [[gulp|core1]].
+
+<<set $initurtVisited to true>>
+
+
+
+:: shiitake
+
+You've interrupted Kenji Eno in the middle of his lunch. <<br>>
+
+You feel bad. Marco doesn't.<<br>>
+
+But that's irrelevant. You need to [[do the job.|core1]]
+
+<<set $mushroomVisited to true>>
+
+:: portable computer
+
+'If we successfully extort him, he'll let us copy the code for <b>Spy Lunch</b> off of this baby,' Marco whispers to you. 'Then we can take it back to the boss.'<<br>>
+
+[[You understand|core1]], to the extent that you can.
+
+<<set $pcVisited to true>>
+
+
+:: interro [nobg]
+
+'Mr. Eno. You know why we're here,' Marco says.<<br>>
+
+'It's about <b>Spy Lunch</b>.'<<br>>
+
+'★★★★ right it's about <b>Spy Lunch</b>. As you ★★★★ well know, the console wars are hotter than a heatwave in hell. Me and my brother, we've been sent here on a bit of corporate espionage to have you rethink what video game companies you've contracted with.'<<br>>
+
+'[[Explain|interro2]],' Kenji Eno says.
+
+:: interro2  [nobg]
+
+Marco explains. 'Until 1994, you developed games for, uh, my employer, who for legal reasons must remain absolutely ★★★★★★★ nameless. Then you started your own company, WARP, and promptly ended the relationship.'<<br>>
+
+'Anyway,' Marco continues. 'Shortly after snubbing us, you make a series of horror games. Cannibal vampires. Invisible enemies. Arctic body horror.'<<br>>
+
+
+<img class='tv' src='./img/dscreencap.gif' draggable='false'> 
+<img class='tv' src='./img/ezeroscreen.gif' draggable='false'> 
+<img class='tv' src='./img/d2screen.gif' draggable='false'><<br>> 
+
+Kenji eno [[nods|interro3]].<<br>>
+
+:: interro3  [nobg]
+
+'I get it. My company didn't want that. I was more than ★★★★★★★ happy to see you sign a contract with one of our key competitors and take your sick mind to those idiots at Se---<i>gah!</i> I can't say their name either.'<<br>>
+
+"But now I find out you make a [[wholesome romance game|interro4]] and distribute it for free a whole bunch of ... DreamQuest consoles."<<br>>
+
+:: interro4  [nobg]
+
+'And how does that make you feel?' Kenji Eno asks.<<br>>
+
+'I feel ★★★★★★★ left out,' Marco says. 'I'm a family man with family values and family computers. And now my boss is going to be ★★★★★★★ ★★★★★★ if we don't get to publish your next game. <b>Spy Lunch</b>. Fun for the whole ★★★★ family. Starting today, <b>Spy Lunch</b> is in production and we're publishing it, capisce?'<<br>>
+
+'[[No thank you|interro5]],' says Kenji Eno.<<br>>
+
+:: interro5  [nobg]
+
+Marco sighs and grabs the portable computer.<<br>>
+
+'Let's discuss this,' Marco says. 'Exhibit ★★★★★★★ One.'<<br>>
+
+You feel your eyelids start to droop. You can tell this is going to be a <<fade "long discussion" "interro6" 1000>>.
+
+:: interro6
+
+'Wait!' Marco shouts. 'Something's missi-- the turtle! Where's the ★★★★★★★ turtle?!? I told you to keep an eye on it! Find it, Lorenzo. FIND IT!'<<br>>
+<<set $turtlePos to "counter">>
+
+You [[comply|core2]].
+
+:: core2
+
+
+
+You take stock of the studio. Around the perimeter, there are various fixtures. You should [[first inspect them|search]] from where you're standing, and then [[later climb up|climb up]] each one in succession once you really steel your nerves.<<br>>
+
+
+<<if $bathroomFound eq true>>
+	You take note of the [[bathroom]] and the 
+		<<if $balconyFound eq true>>[[balcony]].
+		<<else>>balcony door (latched from outside).
+		<<endif>>
+<<endif>>
+
+<<if $bathroomFound neq true and $balconyFound neq true>> You're not going to worry about the other rooms yet.<<endif>>
+
+<<br>>
+
+
+
+Back at the table, Marco is failing to persuade Kenji Eno to hand over  <b>[[Spy Lunch|iwant]].</b> <<if $turtlePos eq "held">> You can <<link "put the turtle back">><<set $turtlePos to "table">> <<goto $nextExp>><</link>> on the table where it belongs.<<endif>><<br>>
+You can <<link "save your game">> <<script>>UI.saves();<</script>><</link>>.
+
+:: iwant
+
+Yes, <b>Spy Lunch.</b> Kenji Eno's long-lost comedic adventure game, which supposedly never made it past the conceptual stage -- nay, past the working title.<<br>>But you know better.<<br>> Spy Lunch exists, and you're going to [[take it from him|core2]].
+
+:: search
+
+On the floor, there's a stool, which you've pushed to the <<cycle "$qStoolPos" autoselect>>	<<option "window">> <<option "table">>     <<option "doorway">>	<<option "counter">> <</cycle>>.<<br>> 
+
+Then there's the [[counter]] and the cupboard above it<<if $canOpenCupboard eq true>>, which is <<cycle "$qCupboardPos" autoselect>> <<option "closed">> <<option "open">><</cycle>> <<endif>>.<<br>>
+
+Next to that, there's a [[sink]], <<if $qSinkClog eq false>> which you've cleared <<else>> which is clogged.<<endif>><<br>>
+
+Then there's a [[stove]], which is <<if $qStoveSet eq "on">>on whether you like it or not<<else>>off via the circuit breaker<<endif>>.<<br>>
+
+There's a [[fridge]], which is <<print $qFridgePower>>.<<br>>
+
+Finally, there's a [[ceiling beam]] and a [[large fan]].<<br>>
+
+(You'll need to [[go back|core2]] if you want to climb up or do anything else.)
+
+:: ceiling beam
+
+Your vision blurs as you look up. <<br>>
+<<if $turtlePos eq "beam">>
+	Not content to merely summit the fridge like it were Mount Everest, the turtle has proceeded to brave the ceiling beam like a gymnast.<<br>>
+	<<set $turtleFound to true>>
+<<endif>>
+
+Best to [[look back down|search]].
+
+:: large fan
+
+You lose your balance as you look upward. <<br>>
+<<if $turtlePos eq "fan">>
+	The turtle has managed to mount the ceiling fan, which is missing a blade.<<br>>
+	<<set $turtleFound to true>>
+<<endif>>
+
+Best to [[look back down|search]].
+
+:: stool
+It'll give you a leg up once it's in the right place.<<br>>
+[[Go back|search]].
+
+:: piu [widget]
+
+<<widget "piuturtle">>
+	<<link "pick it up">><<set $turtlePos to "held">><<goto "core2">><</link>>
+	<<set $nextExp to $args[0]>>
+<</widget>>
+
+:: sink
+
+<<if $yPlungerGot neq true>>
+	The sink is clogged with an unnatural amount of turtle drool. Clearing it will be a big job, but you get the feeling it's going to be necessary.
+<<else>>
+	
+		<<if $qSinkClog eq true>>
+			You clear the sink with the plunger.<<br>> 
+			The turtle drool that was once filling it up roars down the drain. 
+			A job well done, and possibly the most direct route back up from the sewers. <<set $qSinkClog to false>>
+		<<else>>
+			You've cleared the sink of noxious turtle drool. A job well done, and possibly the most direct route back up from the sewers.
+		<<endif>>
+
+<<endif>>
+
+<<br>>
+
+<<if $turtlePos neq "held" and $turtleFound eq false>>
+And yet the turtle couldn't possibly be in the sink itself...<<endif>>
+
+You can [[go back|search]].
+
+
+:: counter
+You scan the counter and the cupboard above it.<<br>>
+
+<<if $turtlePos eq "counter">> 
+	<<turtcrt>><br>
+	Wait. The turtle is right here on the counter. You can just <<piuturtle "exp1">>. This is going to be easier than you thought.<style>.hideback {display:none}</style> 
+
+	<<elseif $turtlePos eq "cupboard">>
+	<<if $qCupboardPos eq "closed">>  You hear a gentle plodding sound from inside the cupboard.<<br>> 
+		<<elseif $qCupboardPos eq "open">> <<turtcrt>> <br>Somehow the turtle has managed to climb into the cupboard. You chew your lip anxiously. You're going to have to go back and climb up there. <<set $turtleFound to true>> 
+	<<endif>>
+	
+<<else>>
+	There's nothing to see here. 
+
+<<endif>>
+
+<span class="hideback">You can [[go back|search]].</span>
+
+
+
+
+:: bathroom
+
+In the bathroom, there's a toilet. You can <<cycle "$qToiletStance" autoselect>> <<option "look at it">><<option "sit on it">> <<option "look in the tank">> <<option "stand in it">><</cycle>> and <<link "flush it">><<goto "toilet">><</link>>.<<br>>
+
+<<if $yKeyGot neq true>> 
+	There's a cabinet, which is locked.<<br>>
+<<else>> 
+	There's also a [[cabinet]], which you can look inside. <<br>>
+<<endif>>  
+
+There's also a shower.<<if $balconyFound eq true>> You quickly take advantage of it and hose the sewage off of your body. Good as new.<<endif>><<br>>
+
+You can [[leave the bathroom|core2]].
+
+
+:: cabinet
+
+<<if $yPlungerGot neq true>>There's a plunger in the bottom of the cabinet, which you can <<link "take">><<set $yPlungerGot to true>><<goto "cabinet">><</link>>. <<br>><<endif>> 
+
+There's a circuit breaker panel inside the cabinet.<<br>>
+<span style="text-transform: uppercase">
+
+STOVE: <<cycle "$qStoveSet" autoselect>> <<option "on">> <<option "off">> <</cycle>><<br>>
+
+FRIDGE: <<cycle "$qFridgePower" autoselect>> <<option "off">> <<option "on">><</cycle>><<br>>
+
+LIGHTS: [[TOGGLE|lights]] <<br>>
+
+GARBURATOR: CONTROL FROM SEWERS ONLY <<br>>
+
+
+</span>
+
+
+
+You can [[close the cabinet|bathroom]].
+
+
+:: lights
+
+'Turn the ★★★★★★★ lights back on!' Marco hollers from the main room.<<br>>
+[[So you do.|cabinet]]
+
+:: toilet
+
+<<if $qToiletStance eq "look at it">>
+The toilet flushing gives you a great feeling of calmness as it drowns out everything else about this regrettable situation.<<br>>
+You're a simple maintenance man at heart. You love your job.
+
+<<elseif $qToiletStance eq "sit on it">>
+You sit on the toilet and think pensively about the life choices that brought you to this point. The toilet calls to you.
+
+<<elseif $qToiletStance eq "look in the tank">>
+You lift the lid from the toilet tank and inspect it, ensuring that it will continue to flush. It most certainly will.
+
+<<elseif $qToiletStance eq "stand in it">>
+	You stand in the toilet and <<fade "flush" "sewers" 2000>>.<<dohideback>> 
+	<<if $yPlungerGot eq true and $qSinkClog eq true>> ... Wait. Maybe you should [[go back|core2]] and try to clear the sink first?<<endif>>
+<<endif>>
+
+<<br>>
+
+
+<span class="hideback">You can [[go back|bathroom]].</span>
+
+
+
+
+:: sewers [sbg]
+
+Your supple, Sicilian middle-aged body fat — oh what a genetic gift! — is coated with years of grease from maintenance work, allowing you to slide down the toilet drain with ease.<<br>>
+
+<<if visited() lte 1>>
+You <b>told</b> Marco you could do this. You could have entered and exited the building via the pipes all along. There was no reason to brave the horrors of the glass elevator, the gaping maw of the urban skyline, the terrible heights. <<br>>
+
+But no, Marco had said. 'I'm not going to show up to a high-profile kidnapping job smelling like literal ★★★★,' he said.<<br>>
+Well, you'll show him. You breathe deep and take in the smell of raw sewage. 
+<<endif>> [[You're in your element|sewerhub]].
+
+:: sewerhub [sbg]
+
+On the tunnel to the right, there's a [[junction]].<<br>>
+
+<<if $qSinkClog neq false>>
+In the center, there's a [[maze]] of smaller tunnels.<<br>>
+<<else>>
+The maze you once traversed is now blocked by a waterfall of turtle drool that you've dislodged from elsewhere.<<br>>
+<<endif>>
+
+On the left, there's a dumpster (which you can't climb into). An [[override switch]] next to it can briefly turn off garburators in the building.<<br>>
+
+<<if visited() lte 1>>
+All around you, sewer turtles scurry like rats. Extremely slow and plodding rats. Despite what Marco says, turtles are more afraid of you than you are of them.
+<<endif>>
+
+:: dumpster [sbg]
+
+<<if $yBladeGot neq true>>
+You land in a dumpster amidst a pile of alpha software and excess merchandise that Kenji Eno has jettisoned from the studio. <<br>>There's also a broken fan blade here.<<br>> You <<link "pick up the fan blade">><<set $yBladeGot to true>><<goto "sewerhub">> <</link>> and climb back down into the sewer.
+<<else>>
+Once again, you land in the dumpster amidst a pile of Kenji Eno's jettisoned alpha software and excess merchandise. You can [[climb down|sewerhub]]. 
+<<endif>>
+
+:: override switch [sbg]
+<<set $garbSteps to $maxGarb>>
+<<set $qGarbSet to "stopped">>
+You pull the override switch.<<br>>
+There's a deafening silence from above. You can walk about <<print $maxGarb>> steps before the garburator blades turn on again.<<br>>
+
+Better [[get moving|sewerhub]].
+
+:: junction [sbg]
+
+On your left, there's a small pipe. You put your eye up to it. It leads to the sink. You can try to 
+
+<<if $qSinkClog eq false>> 
+	[[squeeze in|core2]]
+<<else>>
+	[[squeeze in|sinkup]] 
+<<endif>>
+
+and climb back to the studio.<<br>>
+
+On the right, there's another small pipe ... it leads to the shower. You can try to [[squeeze in|showerup]] and climb.<<br>>
+
+You can [[go back|sewerhub]].
+
+:: sinkup [sbg]
+
+<<if $qSinkClog eq false>> 
+Now that the drain is clear, you can get back to Kenji Eno's [[studio|core2]].<<br>>
+Or you can [[go back|junction]] to the junction.
+<<else>>
+You could definitely squeeze into this pipe if it wasn't clogged with turtle drool.<<br>>
+You can [[go back|junction]] to the junction.
+<<endif>>
+
+
+
+:: showerup [sbg]
+That's ridiculous. Sure, you could climb up, but you could never make it through the tiny holes in the showerhead.<<br>>
+
+You'll have to [[go back|junction]].
+
+:: maze [sbg]
+
+As you enter the sewer maze, you step on a pile of eggshells. Juvenile turtles must be nearby. You'll need to be careful.<<br>>
+
+You can take a [[left|maze2]] or a [[right|maze2]].
+
+:: maze2 [sbg]
+A dense fog overtakes you. You feel a sense of confusion.<<br>>
+
+You can take a [[right|maze3]] or a [[left|maze3]].
+
+:: maze3 [sbg]
+
+You hear footsteps somewhere nearby. "Marco?" you call.<<br>>
+
+A staircase [[leads up|maze4]] or [[down|maze4]].
+
+:: maze4 [sbg]
+It's not Marco. You see the shadow, or perhaps ghost, of a female figure.<<br>>
+
+The path [[continues|maze5]].
+
+
+:: maze5 [sbg]
+
+You hear whispers. You start to speak aloud. Perhaps only to keep yourself sane.<<br>>
+You can take the [[center|maze5b]], [[left|maze5b]] or [[right|maze5b]] tunnel. 
+
+:: maze5b [sbg]
+Suddenly, you feel a horrible pain in your chest. <<br>>
+For some reason, you can't stop thinking about the years of degradation that Marco has subjected you to. Yet you stay loyal to him. You have the same needs. The same wants. To keep your job. To obtain a copy of <b>Spy Lunch.</b><<br>> 
+You keep going.<<br>>
+There's a [[small ladder|maze6]] that isn't tall enough to provoke your fear of heights.
+
+:: maze6 [sbg]
+
+There's just [[one tunnel|maze7]] left.
+
+:: maze7 [sbg]
+You've found it. Another pipe to squeeze up. You put an eyeball to it ... it leads to the fountain on Kenji Eno's balcony.<<br>>
+You can <<fade "squeeze in" "balcony" 500>>.
+
+:: balcony
+<<set $balconyFound to true>>
+<<set $bathroomFound to true>> /% fallback %/
+
+You're on the balcony. The vast Tokyo skyline engulfs you. You feel nauseous.<<br>>
+You cast your eyes downward and focus on what's nearby. There's the small fountain that you came up from, and an outdoor sink with a [[garbage disposal]].<<br>>
+
+<<if $yKeyGot neq true>>There's a cabinet key here. You can <<link "grab it">><<set $yKeyGot to true>><<goto "balcony">><</link>>. <<br>><<endif>> 
+
+You can [[go back inside|core2]] Kenji Eno's studio.
+
+:: garbage disposal
+
+
+The garburator blades are <<print $qGarbSet>>. <<br>> <<if $garbSteps neq 0>> Before it turns on again, you can [[slide down|dumpster]]. <<endif>>
+You can [[go back|balcony]] to the balcony.
+
+:: stove
+
+<<if $qStoveSet eq "on">>Kenji Eno must have wanted to make sure nobody interrupted the shiitake mushrooms he was frying — he's jammed the burner dials so they stay on. <<br>>You won't be able to turn it off in the usual way.<<else>>The stove is now safely off via the bathroom's circuit breaker.<<endif>><<br>>
+
+<<if $turtlePos eq "stove">>
+<img class='tv'  src='./img/turtlecrt.gif' draggable='false'><br>
+As you inspect the stove, you catch sight of the turtle. Fortunately, it's managed to avoid direct contact with any of the red-hot stovetop burners. But against all odds, it's managed to climb up onto the fume hood. 
+	<<br>>Once again, you'll need to climb up.<<set $turtleFound to true>> 
+	<<set $bathroomFound to true>>
+<<endif>>
+
+
+You can [[go back|search]].
+
+
+:: fridge
+
+You take a brief look inside the fridge. <<if $qFridgePower eq "off">> There's no light, no power, and, fortunately, no food that will go bad immediately. Your keen instincts as a maintenance man tell you that the fridge has overloaded the circuit breaker.<<endif>><<br>>
+
+<<if $qFridgePower eq "on">>
+	<<if $yIceGot neq true>>
+		The fridge has been on for just a few minutes, but a giant icecube, almost as tall as your knee, has already formed in the freezer compartment. You can <<link "take it">> <<set $yIceGot to true>> <<goto "fridge">>  <</link>>.
+	<<else>>
+		Another giant icecube is already starting to form.
+	<<endif>>
+<<else>>
+	In the freezer compartment, there's a container of water.
+<<endif>> 
+
+<<br>>
+
+<<if $turtlePos eq "fridge">>You look up. The turtle has managed to climb the fridge. <<set $turtleFound to true>> <<br>><<endif>>
+
+
+The fridge doors close as you let go. [[You can go back|search]].
+
+
+
+
+:: climb up
+
+
+
+<<if $turtleFound eq false>>
+    <<if $turtlePos eq "held" or $turtlePos eq "table">>
+        There's no point in trying to climb now that you've got the turtle.
+    <<else>>
+        There's no point in trying to climb anywhere until you've found the turtle.
+    <<endif>>
+
+<<else>>
+   <<if $turtlePos eq "cupboard">>
+		<<if $qStoolPos eq "counter">>	You take a deep breath and close your eyes. First the stool, then the counter. Then you come face to face with the turtle in the cupboard. <style>.hideback {display:none}</style> <<br>>
+		<<turtcrt>><br>
+			You can <<piuturtle "exp2">>.
+			<<else>>You need a step up before you start climbing.		
+		<<endif>>
+   <<endif>>
+   
+   <<if $turtlePos eq "stove">>
+		<<if $qStoolPos eq "counter">>	You take a deep breath, close your eyes. First the stool, then the counter.<<br>>
+				<<if $qSinkClog eq true>>You take another step and end up with one foot in the sink. It's full of turtle drool. You need to clear the sink before you can climb any further.
+				<<else>>
+					With the sink clear, you step gingerly toward the stove. <<br>>
+						<<if $qStoveSet eq "on">>
+						You burn your boots on the cooktop. You're going to need to turn it off.
+						<<else>>
+						
+
+						Now that the stove is off, you can easily stand on top of its burners. <<br>> You reach toward the turtle that's atop the fume hood. You can <<piuturtle "exp3">>. <<br>> <img class='tv'  src='./img/turtlecrt.gif' draggable='false'> <<dohideback>>
+						<<endif>>
+				<<endif>>
+		<<else>>You need a step up before you start climbing.		
+		<<endif>>
+   <<endif>>
+
+<<if $turtlePos eq "fridge">>
+
+				<<if $qStoolPos eq "counter">>	You take a deep breath, close your eyes. First the stool, then the counter.<<br>>
+						<<if $qSinkClog eq true>>You take another step and end up with one foot in the sink. It's full of turtle drool. You need to take care of it before you can climb any further.
+						<<else>>
+							With the sink clear, you step gingerly toward the stove. <<br>>
+								<<if $qStoveSet eq "on">>
+								The stove would burn your feet <<if $yIceGot>>and would melt the ice you're carrying<<endif>>. You're going to need to turn it off.
+									<<else>>
+									Now that the stove is off, you can easily walk across the burners. <<br>>
+										<<if $yIceGot>>
+											<<if $qFridgePower neq "off">>
+											You consider using the ice cube to climb as a step toward the top of the fridge, but the heat radiating from the appliance would undoubtedly melt it.
+											<<else>>
+											<img class='tv'  src='./img/turtlecrt.gif' draggable='false'> <br>
+											You put down the ice cube and step to the top of the fridge. You breathe a sigh of relief -- the turtle is still there. You can <<piuturtle "exp4">>.<<dohideback>> 
+											<<endif>>
+										<<else>>
+											You'll need something to use as a step toward the top of the fridge.  
+										<<endif>>
+								<<endif>>
+						<<endif>>
+				<<else>>You need a step up before you start climbing.		
+				<<endif>>
+	
+<<endif>>
+
+
+
+<<if $turtlePos eq "beam">>
+
+				<<if $qStoolPos eq "counter">>	You take a deep breath, close your eyes. First the stool, then the counter.<<br>>
+						<<if $qSinkClog eq true>>You take another step and end up with one foot in the sink. It's full of turtle drool. You need to take care of it before you can climb any further.
+						<<else>>
+							With the sink clear, you step gingerly toward the stove. <<br>>
+								<<if $qStoveSet eq "on">>
+								The stove would burn your feet <<if $yIceGot>>and would melt the ice you're carrying<<endif>>. You're going to need to turn it off.
+									<<else>>
+									Now that the stove is off, you can easily walk across the burners. <<br>>
+										<<if $yIceGot>>
+											<<if $qFridgePower neq "off">>
+											You consider using the ice cube to climb as a step toward the top of the fridge, but the heat radiating from the appliance would undoubtedly melt it.
+											<<else>>
+											<img class='tv'  src='./img/turtlecrt.gif' draggable='false'> <br>
+											You put down the ice cube and step onto the fridge, then crawl on all fours onto the ceiling beam. You shimmy along several feet toward the turtle. <<br>>You can <<piuturtle "exp5">>.<<dohideback>> 
+											<<endif>>
+										<<else>>
+											You'll need something to use as a step toward the top of the fridge.  
+										<<endif>>
+								<<endif>>
+						<<endif>>
+				<<else>>You need a step up before you start climbing.		
+				<<endif>>
+	
+<<endif>>
+
+
+<<if $turtlePos eq "fan">>
+
+				<<if $qStoolPos eq "counter">>	You take a deep breath, close your eyes. First the stool, then the counter.<<br>>
+						<<if $qSinkClog eq true>>You take another step and end up with one foot in the sink. It's full of turtle drool. You need to take care of it before you can climb any further.
+						<<else>>
+							With the sink clear, you step gingerly toward the stove. <<br>>
+								<<if $qStoveSet eq "on">>
+								The stove would burn your feet <<if $yIceGot>>and would melt the ice you're carrying<<endif>>. You're going to need to turn it off.
+									<<else>>
+									Now that the stove is off, you can easily walk across the burners. <<br>>
+										<<if $yIceGot>>
+											<<if $qFridgePower neq "off">>
+											You consider using the ice cube to climb as a step toward the top of the fridge, but the heat radiating from the appliance would undoubtedly melt it.
+											<<else>>
+												You put down the ice cube and step onto the fridge, then shimmy along the ceiling beam toward the fan.<<br>>
+													<<if $yBladeGot>>
+													You attach the fan blade and [[prepare to turn|turn1]] it ever so delicately.<<dohideback>>
+													<<else>>
+													Alas, the turtle is on the most distant fan blade. You would try to turn the blades manually, but the nearest one has broken off and is nowhere to be seen. 
+													<<endif>>
+											<<endif>>
+										<<else>>
+											You'll need something to use as a step toward the top of the fridge.  
+										<<endif>>
+								<<endif>>
+						<<endif>>
+				<<else>>You need a step up before you start climbing.		
+				<<endif>>
+	
+<<endif>>
+
+
+<<endif>>
+<<br>>
+<span class="hideback">You can [[go back|core2]].</span>
+
+
+:: turn1 
+
+You [[turn|turn2]] the fan blade a one-third of a full rotation.<<br>>The turtle is far from you and to the left.
+
+:: turn2
+
+You [[turn|turn3]] the fan blade a one-third of a full rotation.<<br>> The turtle is far from you and to the right.
+
+:: turn3
+
+You [[turn|turn1]] the fan blade a one-third of a full rotation.<<br>> The turtle is in front of you. You attempt to <<link "coax it">><<set $nextExp to null>><<set $turtleFound to false>><<set $turtleHeld to false>> <<goto "marcoded1">><</link>> toward you ever so gently.
+
+
+:: exp1 [nobg]
+
+<<set $canOpenCupboard to true>>
+
+
+'Alright,' Marco says. 'Let's talk about your first smash hit, simply titled <b>D</b>. The aforementioned cannibal vampire game.'<<br>>
+<img class='tv'  src='./img/dcover.gif' draggable='false'> <br>
+'That's [[one way|exp1a]] of describing it,' says Kenji Eno.<<br>>
+
+
+
+
+:: exp1a [nobg]
+
+
+'Blood, guts, and gore. You knew that the publisher wouldn't allow it to be released in such a state and would censor the ★★★★ out of it. So what did you do? You submitted a clean version of the game for review.'<<br>>
+'[[Correct|exp1b]],' says Kenji Eno.<<br>>
+
+:: exp1b [nobg]
+
+
+'Then you deliberately missed the deadline for submitting the master copy,' raves Marco. 'And the penalty for <b>that</b> was that you were required to hand-deliver the final version ... which had all of the disturbing taboo ★★★★ in it.'<<br>>
+
+'And I managed to [[get away with it|exp1c]],' says Kenji Eno. 'And sell a million copies.'<<br>>
+
+:: exp1c [nobg]
+
+
+'If I had tried to pull a stunt like that,' says Marco, 'I'd be fired before you can say hold your ★★★★★★★ horses. But this sort of rebellion was your intent from the moment you set up your company. Why? How?' <<br>>
+
+Kenji Eno shrugs. 'There were a ton of annoying rules around blood and violence at the time. So I tried to avoid them. I thought of myself as a spaceman. I was on Planet A and my audience was on Planet C.' He moves his fingers through the air. 'There were annoying laws on Planet B ... but if I was a spaceman, I could just warp through it. And that's why I called my company WARP.'<<br>>
+
+Marco thinks that this explanation explains nothing. He [[stares blankly|exp1d]].
+
+:: exp1d [nobg]
+
+
+'Anyway, everyone knows this story by now. Kenji Eno does whatever the ★★★★ he wants. You swapped the publisher's discs to avoid censorship like it was a walk in the park. This isn't exactly ★★★★★★★ leverage against you, I know.'<<br>>
+
+'And yet you want the source code for <b>Spy Lunch,</b>' Kenji Eno says.<<br>>
+
+'I'm just setting the stage. Now, onto <<fade "Exhibit Two" "exp1e" 1000>>.'<<br>>
+
+:: exp1e
+
+Marco's eyes twitch for a moment. 'Holy ★★★★★★★ ★★★★!' says Marco, sweating. 'Where's the turtle? THE TURTLE! Find it, Lorenzo.'<<br>>
+
+<<set $turtlePos to "cupboard">>
+
+You <<link "oblige">> <<goto "core2">><</link>> him.
+
+:: exp2 [nobg]
+
+'Okay,' Marco says. 'For your next game, <b>Enemy Zero</b>, you continued down the horror path, ★★★★★★★ off the publishers for other reasons.'<<br>>
+
+<img class='tv'  src='./img/ezcover.gif' draggable='false'> <br>
+
+'That's correct,' says Kenji Eno.<<br>>
+
+'As the story goes, instead of announcing what console it would be released on ... you held a press conference to announce what console it [[wouldn't|exp2a]] be on.'<<br>>
+
+:: exp2a [nobg]
+
+
+'Yeah. I was mad as hell because Sony hadn't been able to manufacture enough copies of my previous game. So when Enemy Zero came out, I told some guy from Sony I was going to punch him in the face if I didn't see my game in stores.'<<br>>
+'And let me guess. You didn't see your game in the store.'<<br>>
+'Right. And I did [[punch him in the face|exp2b]].'
+
+:: exp2b [nobg]
+
+'And since that didn't satisfy your thirst for revenge, you embarrassed Sony itself on stage. You swapped their logo for that of Se...(gah!) in real time.'<<br>>
+'[[That's right.|exp2c]] We announced <b>Enemy Zero</b> as an exclusive for Sega.'<<br>>
+
+:: exp2c [nobg]
+
+
+Marco twitches. 'So if some company ★★★★★★ you off, just renege on every aspect of the relationship that you've built up. Burn the bridges. Swap the logos. You see, this is why my company is so ★★★★★★ afraid of you.'<<br>>
+'But also why it needs <b>Spy Lunch.</b>'<<br>>
+'That's right. Now I'm just building up a case here, mind you. Now, if I can direct your attention to my documents, next to the, [[next to the|exp2d]] ...'
+
+:: exp2d
+
+'Next to the ... LORENZO? Where's the turtle? Where's the ★★★★★★★ ★★★★★★★ turtle? I swear, this is going to be the death of me. FIND THE ★★★★★★ TURTLE and don't let it out of your ★★★★★★ sight.'<<br>>
+
+You <<link "search for it">> <<set $turtlePos to "stove">><<goto "core2">><</link>> once again.
+
+:: exp3 [nobg]
+
+
+'Alright,' says Marco. 'Your next game after that was <b>D2</b>. Inspired heavily by <b>The Thing</b>, it was a sci-fi body horror about people blooming into their darker selves in the ★★★★★★★★★★★ Arctic tundra.' <<br>>
+<img class='tv'  src='./img/d2cover.gif' draggable='false'> <br>
+
+'Yes. It was [[heavily censored|exp3a]] on release in the U.S. version, particularly the sexualized violence that illustrated that point.'
+
+:: exp3a [nobg]
+
+
+'And you didn't fight the censorship this time,' Marco ponders. 'No swapping out the disc at the last minute this time around.'<<br>>
+
+Kenji Eno sighs. 'No. By <b>D2</b>, I had given up. If the publisher was going to censor it, they were going to censor it. When I look back at it, I can still feel the thick atmosphere of it all. Not just the game, but my own state of mind. I had such a difficult time coming up with anything but the opening chapter. I wasn't fully there. It's like when a band makes their last album before breaking up.'<<br>>
+
+'★★★★. I would have [[burned every copy|exp3b]] of that abomination to a crisp if you submitted it to my company for review. But you're even making me depressed.'
+
+:: exp3b [nobg]
+
+
+'However,' Marco says. 'However. What I wanted to raise here is that you did pull yet another publicity stunt to promote <b>D2</b>.'<<br>>
+
+'Right. Instead of showing any footage from the game at the Tokyo Game Show, we celebrated the cherry blossom season for the first two days.'<<br>>
+
+<img class='tv'  src='./img/cherry.gif' draggable='false'> <br>
+
+'A [[sentimental display|exp3c]] for a game meant to shock and terrify,' Marco reflects.
+
+:: exp3c [nobg]
+
+'And yet there was a connection,' Kenji Eno hints. 'Cherry blossoms are a beautiful thing, but they also represent change. The characters are literally described as 'blossoming' in-game as they mutate into monsters.' <<br>>
+
+'Let's not beat around the ★★★★★★★ bush. Your cherry blossom festival totally concealed the nature of the ★★★★★★★ game.'<<br>>
+
+'If you [[insist|exp3d]].'
+
+
+:: exp3d [nobg]
+
+
+'Now. I'm not Sigmund ★★★★★★★ Freud but if you ask me, the censorship you found yourself facing goes hand in hand with your evasive publicity stunts. You weren't just avoiding censorship. I think you needed those limitations as an opposing force to evoke your creativity. Like a game of cat and mouse.'
+<<br>>
+Kenji Eno looks dubiously at Marco.
+<<br>>
+'Which is why I think I can persuade you to let us publish <b>Spy LUUUN — ORENZO! </b> LORENZO! ★★★★! [[LORENZO!|exp3e]]
+
+:: exp3e
+ 
+'For the last ★★★★★★★ time, where's the ★★★★★★★ TURTLE?' Marco raves. 'You're going to get us both ★★★★★★★ killed if you keep this up.' <<br>>
+'Find the turtle and keep it in your sights like you're a ★★★★★★★ nuclear submarine hunting an atomic ★★★★★★★ whale. Do you get it? Do you even value my ★★★★★★★ life? Or your own?'<<br>> 'I'm starting to think you're not taking this ★★★★ seriously. Just find the turtle, you ★★★★★★★ ★★★★★.'
+
+<<set $turtlePos to "fridge">>
+
+[[You appease him.|core2]]<<br>>
+
+
+:: exp4 [nobg]
+Marco continues to interrogate Kenji Eno.<<br>>
+
+'What I need to raise at this point is that in between all of these horror games, you made <b>Real Sound: The Winds of Regret</b>. A touching love story.'<<br>>
+
+<img class='tv'  src='./img/realtitle.gif' draggable='false'> <br>
+
+'[[That's right.|exp4a]]'
+
+:: exp4a  [nobg]
+'The story goes that some of your biggest fans were blind or visually impaired.'<<br>>
+
+'Yes. After corresponding with them, I decided that <b>Enemy Zero</b> should have combat sections featuring invisible enemies. Then I expanded on that for <b>Real Sound.</b> An adventure game made entirely of audio. A visual novel with no visuals.'<<br>>
+
+Marco [[nods|exp4b]]. He seems to approve of the unoffensive premise.
+
+:: exp4b  [nobg]
+
+'A game for the blind,' Marco says.<<br>>
+'No,' Kenji Eno corrects him. 'A game that would give blind and non-blind players [[exactly the same experience|exp4b2]].'<<br>>
+'★★★★,' Marco says, recognizing his mistake.<<br>>
+
+:: exp4b2 [nobg]
+
+Kenji Eno continues. 'I had arrogantly expected blind players to thank me for making a game just for them, but they gave the same criticisms as anyone else. Some parts of <b>Real Sound</b> could have been better, they said. Some of them even berated me. But I knew I'd accomplished my goal.' <<br>>
+'Your goal?'<<br>>
+'Yes. My dream was that blind and sighted players would share the same impressions.' Kenji Eno laughs. 'Even the [[same criticisms|exp4c]].'
+
+:: exp4c [nobg]
+
+'Criticism ... Yeah. What I really want to get at is ... <b>Real Sound</b>...this game. Such a sweet story. A bittersweet one, but sweet. None of your usual ★★★★★★★★. It's the sort of thing we would've been happy to publish.'<<br>>
+'I suppose that's true.'<<br>>
+'And then you had to go and give it to my [[★★★★★★★ competitor|exp4d]].'<<br>>
+
+:: exp4d [nobg]
+
+'Yes. I made <b>Real Sound</b> a Sega exclusive on the condition that the company [[donated one thousand of their consoles|exp4e]] to the blind. Then we matched the offer by donating one copy of the game per console.'<<br>>
+
+'★★★★,' Marco says, tearing up despite his attempts to keep a tough exterior. <<br>>
+
+:: exp4e [nobg]
+Marco laments. 'If this is the sort of thing you had done throughout the rest of your career, how would the industry have treated you?'<<br>>
+
+Kenji Eno [[says nothing.|exp4f]] His work speaks for itself.
+
+:: exp4f [nobg]
+
+'But this story has an ironic twist,' Marco says. 'In the West, everyone talks about <b>Real Sound</b>, but nobody knows the plot itself.' <<br>>
+
+'It's never been translated outside of Japanese,' Kenji Eno admits. <<br>>
+'So the end result? The most complete English summary of the game is a fanfic creepypasta with no relation to the real thing. Your reputation for horror seeped out even into your non-horror games. You [[★★★★★★★ played yourself|exp4g]].'<<br>>
+
+
+:: exp4g [nobg]
+
+Kenji Eno remains silent. Has Marco been too harsh? He pushes ahead.<<br>>
+
+'Which brings me to my final point ... we want you back. If I can just show you — if I can just [[get ahold of myself|exp4h]] and show you what we're working o...'
+
+:: exp4h
+
+Marco looks at the table. 'LORENZO! WHERE'S THE ★★★★★★★ TURTLE?!?'<<br>>
+
+(Marco's demand is followed by five straight minutes of genuinely unnerving verbal abuse, perhaps to hide the fact that Kenji Eno has touched his more tender emotions. You, dear reader, will be spared Marco's abuse. Lorenzo is not so lucky.)<<br>>
+
+<<set $turtlePos to "beam">>
+
+Lorenzo [[goes to find the turtle|core2]] once again.
+
+:: exp5 [nobg]
+
+'Here's where I'm going with this, Mr. Eno,' Marco says. 'You're like a dog who caught a car. Your reputation is larger than life.' <<br>>
+
+'Word is that an executive at Sony was protecting your reputation throughout all your publicity stunts. When the company board freaked out over what you did on stage ... one of their executives [[just said|exp5aa]] ... You know what they said?'<<br>>
+
+Kenji Eno blinks.
+
+:: exp5aa [nobg]
+
+They said: 'He's a musician. Musicians are like that. Kenji Eno is [[just what we need|exp5a]] in the video game industry.'<<br>>
+
+<img class='tv'  src='./img/enomusicsm.gif' draggable='false'> <<br>>
+
+:: exp5a [nobg]
+
+'And now your career is at a dead end,' Marco continues. 'You're a ★★★★★★★ wreck. You're not sleeping. It's not just poor sales. It's poor sales combined with a riveting history of living on the edge of a knife. Publishers don't even care to try and resist you anymore. You have no one to fight,' Marco sighs.<<br>>
+
+'And we know you're [[giving up|exp5b]] on making video games.' 
+
+:: exp5b [nobg]
+
+It's true. In fact, Kenji Eno is currently thinking of repurposing WARP to work on cigarette ads and cellphone-compatible Coca-Cola machines. <<br>>
+
+<img class='tv'  src='./img/vend.gif' draggable='false'> <<br>>
+
+'You're giving up ... but [[we're not giving up|exp5c]],' Marco says.<<br>>
+
+:: exp5c [nobg]
+
+'Is that so?' Kenji Eno raises an eyebrow.<<br>>
+
+'In the next ten years, we're going to make a console controller that you can throw around like ★★★★★★★ nunchuks. You're going to love it.'<<br>>
+
+Kenji Eno is dubious. 'I don't think I'd like [[any of your games|exp5d]].'
+
+
+:: exp5d [nobg]
+
+'I didn't say you'd like our games. You're going to hate our games. I said you'd like the nunchuk. In fact, you won't even bother plugging in the console. You'll just throw around the controller like it's a ★★★★★★★ brick. Very ★★★★★★★ meditative. Good for brainstorming, apparently.'<<br>>
+
+Kenji Eno [[laughs|exp5e]] because he knows its true.
+
+:: exp5e [nobg]
+'Okay, here's what I'm leading up to. We don't understand you. We never will. Just give us the code for <b>Spy Lunch.</b> We can't promise we'll do justice to your work. But we'll certainly ★★★★ it up in some way you're not expecting.'<<br>>
+
+Kenji Eno laughs again. And despite all the heady thematic interpretations that have been circulated during the forced discussion, Marco thinks that's all that Kenji Eno wanted. To [[surprise people|exp5f]] and be [[surprised himself|exp5f]].<<br>>
+
+:: exp5f  [nobg]
+
+'Sure, you'll be censored. I'll make ★★★★ sure of it.' Marco continues. 'But you know what? I know censorship. It makes no ★★★★★★★ difference. Because even when everything's ★★★★★★★ missing, even when everything is ★★★★ on by the censors and ★★★★★★ over by control-freak publishers — sometimes people will know exactly what the ★★★★ you mean.'<<br>>
+
+Kenji Eno isn't listening anymore. He's [[already started the file transfer|exp5g]].<<br>>
+
+Marco, meanwhile, gets a headrush of power. <i>Being is a censor is more fun than a metric ★★★★ton of monkeys,</i> he thinks. <i>Damn, I love my job.</i>
+
+
+:: exp5g  [nobg]
+
+<b>SPY LUNCH</b> | FILE TRANSFER    
+
+<script>
+  setInterval(() => {
+    const el = document.getElementById('toggle');
+    if (el) el.textContent = (el.textContent === '░░') ? '▒▒' : '░░';
+  }, 1000);
+</script>
+    <span id="toggle">░░</span>░░░░░░░░░░░░░░░ 0.1%  <<br>>
+You lean over the personal computer. 'Have you got <b>Spy Lunch</b>, Marco?' <<br>>
+'Almost. But not until you find the ★★★★★★★ turtle, Lorenzo,' Marco sighs. 'Yes, I know it's gone missing again. I'm not even mad. Just find it.'<<br>>
+You [[resume your search|core2]] for what is hopefully the last time.
+
+<<set $turtlePos to "fan">>
+
+
+:: marcoded1
+<img class='tv'  src='./img/turtleshake.gif' style="height: 80vh;" draggable='false'> <<br>>
+
+The turtle looks at you with pure contempt and crawls defiantly off the fan, plummeting violently to the ground.<<br>>
+It collides with Marco's head, who is now on the ground bleeding profusely.<<br>>
+You wail and rush down, trying to remember the [[basics of first aid|marcoded2]].<<br>>
+
+:: marcoded2
+
+Step one. Staunch the bleeding. You tear off a relatively clean part of your maintenance uniform and wrap it around Marco's head.<<br>>
+[[What's next?|marcoded3]]<<br>>
+
+:: marcoded3
+Recovery position. You turn Marco on his side and awkwardly arrange his limbs.<<br>>
+[[Next step.|marcoded4]]
+
+:: marcoded4
+
+Mouth-to-mouth resuscitation.<<br>>
+You attempt it. You are repulsed. Not figuratively by the thought of performing the kiss of life on your middle-aged Italian brother.<<br>>
+
+No, you are literally — <b>literally</b> — repulsed as your extremely bulbous noses bounce off of each other during the attempted medical maneuver. Your hereditary nasal deformity has made any sort of life-saving facial contact impossible. <<br>>
+You sob in grief. In fact, you totally [[lose it|marcoded5]].
+
+:: marcoded5
+
+You lock eyes with Kenji Eno. "MAMMA ★★★★★★★ MIA! You killed my brother!' you wail.<<br>> 
+Kenji Eno stares back at you with indifference. You are, after all, the one who burst into his studio and kidnapped him. Why should he care about you?<<br>>
+There's just one option left. You reach onto Kenji Eno's lunch tray and grab the [[biggest, greenest shiitake mushroom|marcoded5a]] you can find.<<br>>
+
+:: marcoded5a
+'EAT-A THE MUSHROOM, MARCO,' you sob, lapsing back into the stereotypical Italian accent that you've tried so hard to purge from your being.<<br>>
+You stuff another shiitake [[mushroom|marcoded5b]] into his mouth. 'EAT-A THE MUSHROOM!' <<br>>
+
+:: marcoded5b
+
+Marco's eyes flutter open.<<br>> 
+'What the ★★★★ are you doing, Lorenzo?' he says. 'Did your criminally negligent ★★★ get me killed by a ★★★★★★★ turtle again?'<<br>>
+There's [[only one answer|marcoded6]].
+
+:: marcoded6
+
+'No,' you lie.<<br>>
+'I should ★★★★★★★ hope not.'<<br>>
+You [[instantly regret|marcoded7]] saving his life. 
+
+:: marcoded7
+
+'Hey, look.' Marco says. 'The file transfer's ready.'<<br>>
+
+<b>SPY LUNCH</b> | FILE TRANSFER    
+<script>
+  setInterval(() => {
+    const el = document.getElementById('toggle');
+    if (el) el.textContent = (el.textContent === '░░░░░░░░░░░░░░') ? '▒▒▒▒▒▒▒▒▒▒▒▒▒▒' : '░░░░░░░░░░░░░░';
+  }, 1000);								
+</script>
+    <span id="toggle">░░░░░░░░░░░░░░</span> 100%  <<br>>
+'Well, we'll be off,' Marco says, [[taking the disc|marcoded7b]] and tipping his hat.<<br>>
+
+:: marcoded7b
+
+But in that moment you look back and realize something. Kenji Eno is cradling his pet turtle. You're not the victim here. Accident or not, you harmed the only thing that gave Kenji Eno stability in his life. His pet turtle.<<br>>
+[['Lorenzo?'|marcoded7c]] Marco says.<<br>>
+
+:: marcoded7c
+The longer you stare, the less it looks like Kenji Eno is cradling the turtle, and more like he's wielding it like a blunt weapon.<<br>>
+Marco musters up the tiny bit of empathy he has for you. He sees it too. The turtle's hard carapace. Your brittle bones. You're not leaving this place alive. <<br>>
+You rush to the [[elevator|elevatorcheck]].
+
+<<set $gamefinished to true>>
+
+:: elevatorcheck
+
+
+
+'What the ★★★★. The elevator's jammed shut,' Marco says. <<br>>
+You look around to [[find another exit|east-facing hallway]].<<br>>
+There's a maintenance panel that can be opened with a password.<<br>>
+
+<div class="input-row">
+<<textbox "$ans1" "NNNN">>
+<<textbox "$ans2" "NNNN">>
+<<textbox "$ans3" "NNNN">>
+</div>
+
+<style>
+.input-row {
+  display: flex;
+  width: 100%;
+  gap: 8px; /* Adds space between boxes */
+}
+.input-row input {
+  flex: 1;        /* Each input takes equal width */
+  min-width: 0;   /* Prevents overflow */
+}
+</style>
+
+
+<<link "Confirm">>
+<<if $ans1 eq $pass1 and $ans2 eq $pass2 and $ans3 eq $pass3>>
+	<<goto "elevator">>
+<<else>>
+	<<goto "wrong">>
+<<endif>>
+<</link>>
+
+
+:: wrong
+
+No, that's not it. You [[try again|elevatorcheck]].
+
+
+:: east-facing hallway
+
+The [[glass elevator|elevatorcheck]] is here.
+Kenji Eno is in pursuit from his studio -- room <span class="codenum">1000</span>. Room <span class="codenum">1001</span>, <span class="codenum">1002</span>, and <span class="codenum">1003</span> are locked.<<br>>
+You can <<link "save your game">> <<script>>UI.saves();<</script>><</link>> despite the dire situation.<<br>>
+You can run to the [[north-facing hallway]].
+
+:: north-facing hallway
+
+You're in the hallway on the north side of the building. There's a [[stairwell]] here. <<br>>
+You can go into room <span class="codenum">[[1004]]</span>. Room <span class="codenum">1005</span> and room <span class="codenum">1006</span> are locked.<<br>>
+You can run to the [[west-facing hallway]].
+
+:: 1004
+
+It's a business suite just like Kenji Eno's, except it's on the north side of the building. Outside the window, you can see a giant construction crane. The serial number printed on the crane is <span class="codenum"><<print $pass3>></span>.<<br>>
+You can sneak back into the [[hall|north-facing hallway]].
+
+:: west-facing hallway
+
+The west-facing hallway has a giant window that opens onto the vast void of Tokyo's, no, the Earth's horizon. Your stomach churns.<<br>>
+A plane flies by with the serial number <span class="codenum"><<print $pass1>></span>.<<br>>
+You can run to the [[south-facing hallway]].
+
+:: south-facing hallway
+
+There are two rooms in the south-facing hallway. <span class="codenum">1007</span> and, breaking from the scheme in the most suspicious way, room <span class="codenum"><<print $pass2>></span>.<<br>>
+You can run to where you started, the [[east-facing hallway]]. Fortunately, Kenji Eno is only pursuing you counterclockwise, so you can run around this floor as many times as you want until you come up with a plan.
+
+:: stairwell
+
+The bottom of the tower has flooded. In fact, the entire stairwell is welling up with turtle drool. You'll need to [[go back|north-facing hallway]] and find a way to open the elevator.<<br>>
+
+ 
+
+
+
+
+
+:: elevator
+You flip open the panel. There's the problem. A broken wire. You start rewiring it.<<br>>
+Your mind races. You need to work fast. Kenji Eno is about to bash in your skull with a turtle. know it. You can feel it in your bones. Particularly the bones of your skull, which Kenji Eno is about to bash in with a turtle.<<br>>
+'He's coming for us, Lorenzo!' Marco wails, [[chewing his fingernails|elevator1a]].<<br>>
+
+:: elevator1a
+
+You work faster. You start to sweat. Finally there's a spark. The door opens. You make it inside the [[elevator|elevator2]].<<br>>
+So does Kenji Eno.
+
+:: elevator2
+Inside the glass elevator, Kenji Eno shrugs off his remaining restraints and tears the duct tape from his mouth. <<br>>
+Your brother is frozen in terror. You need to act fast.<<br>>
+Marco was right. Your grandmother was right. The censors were right. Kenji Eno is obviously dangerous. He spent years creating violent video games featuring gratuitous death and violence. His work was censored for a reason. Anything you do at this point would be self-defense. Maybe even an accident.<<br>>
+
+Marco left his sledgehammer here on the way up. You can [[pick it up|elevator3]]. 
+
+:: elevator3
+And after enduring Marco's years of verbal abuse ... well, anything that happens to Marco would be an accident too.<<br>>
+
+As you wrap your fingers around the sledgehammer's handle, the Tokyo landscape fades. The elevator's glass window hardens, crystallizing into a dark tortoiseshell. You'll never have to look out at the gaping maw of earth's horizon ever again.<<br>>
+
+You [[tighten your grip|elevator4]] on the hammer.
+
+:: elevator4 
+
+You feel turtle drool welling up beneath your feet.<<br>>
+
+You [[tighten your grip|elevator5]] a second time.
+
+:: elevator5 
+
+Time passes. Now the waterline is up to your neck.<<br>>
+
+You <<fade "close your eyes" "streetlevel" 4000>>. <<br>>
+  
+:: streetlevel  
+
+The elevator dings. The three of you walk out onto the street.<<br>>
+
+You realize that nobody has any idea of what you were about to do. You feel absolutely terrible.<<br>>
+
+'I'm going home to get some sleep,' Kenji Eno says, caressing the now-recovered [[turtle|hate]]. 'I just wanted to see you off [[politely|street1a]], gentlemen.'<<br>>
+
+:: hate
+
+You were wrong about Kenji Eno. He seems like a decent guy.<<br>>
+You were right about the turtle, which continues to stare at you with pure contempt. Fortunately, it can't hurt you on its own.<<br>>
+You breath a [[sigh of relief|streetlevel]].
+
+:: street1a
+
+The word tweaks something in Marco's brain.<<br>>
+
+'Politely. Speaking of politeness, before we, uh ... rudely interrupted you today, our boss generously sent you a copy of a game we made. <b>Maintenance Man Marco and His Astounding Sixty Four Dimensions of Fun.</b> Did you ... uh ... [[like it|street2]]?'<<br>>
+
+:: street2
+
+'No.' Kenji Eno says.<<br>>
+'Didn't like it? Didn't like it?' Marco puffs up his chest. 'Would you say that to my boss' face?'<<br>>
+'I <b>did</b> say that to your boss' face,' Kenji Eno says.<<br>>
+Marco's face goes pale. '[[Let's go|street3]], Lorenzo. Kenji Eno scares me.'<<br>> 
+
+:: street3
+
+Sitting in the maintenance van, Marco tells you to check the disc in your laptop. He rubs his hands in anticipation. <<br>>'Hoo boy. First look at <b>Spy Lunch.</b> And we may be the only people to ever see it. When we get back to the office, I'm going to censor it so ★★★★★★★ hard.'<<br>>
+'Uh, Marco. You're [[not going to like what you see|street3b]].'<<br>>
+
+:: street3b
+
+Marco grabs the laptop. 'What the ★★★★ is this? Who the ★★★★ is P.B. ★★★★★★★ Parjeter? The Kidnapping of Kenji Eno? What the ★★★★ is this ★★★★★★★?' <<br>>
+You both realize [[what happened|street4]].<<br>>
+
+:: street4
+
+'I can't believe it. He swapped the discs. Kenji Eno swapped the discs.'<<br>>
+
+'The boss is not going to be happy,' you muse. 'What are you going to tell him when we get back?'<<br>>
+Marco makes a U-turn. 'Nothing. We're not going back. We're gonna leave this industry for good. I got family in New York. No more video games. No more corporate ★★★★★★★ espionage. No more kidnappings. No more censorship. Just [[honest maintenance work|street5]].'<<br>>
+
+:: street5
+'Sounds like a plan, Marco,' you sigh, searching for the fastest route to escape the downtown traffic. 'Think you can squeeze the van into that sewer drain?'<<br>>
+'[[With pleasure|street6]],' he says.
+
+:: street6 [nobg]
+
+<h1 style="text-align: center; font-weight: normal">THE END</h1> 
+<div  style="text-align: center !important"> <img class='tv'  src='./img/cherry.gif' draggable='false'></div> <br>
+<<timed 10s>><<goto "blankwait">><</timed>>
+
+:: blankwait [nobg]
+
+<<timed 5s>><<goto "tmnt0">><</timed>>
+ 
+:: tmnt0  [sbg]
+
+ 
+<b>EPILOGUE: The Turtle King, or What Happened in the Sewer Maze</b><<br>>
+ * * * * * * * * * * * * * * * * * * * * * * * *  <<br>>
+
+The next night, you wake up in a cold sweat. <<br>>
+You remember what happened in the <<fade "sewer maze" "tmnt1" 2000>>.
+
+:: tmnt1 [sbg]
+
+You step on an eggshell. Juvenile turtles. You'll need to be careful.<<br>>
+
+You start to think that this winding maze may be the only way out.<<br>>
+
+And as you advance through the tunnels, you hear splashing footsteps behind you. Not turtle footsteps. Human footsteps.<<br>>
+
+'Marco?' [[you call|tmnt2]].
+
+:: tmnt2 [sbg]
+
+But it's not Marco. It's a woman. She introduces herself. 
+
+'I'm Laura. I'm a news reporter — and I can explain what's going on here.'<<br>>
+
+You look at Laura [[expectantly|tmnt2b]].<<br>>
+
+:: tmnt2b [sbg]
+
+'I've been trying to infiltrate a ring of rogue juvenile turtles,' she continues. <<br>>
+
+You think that this explanation explains nothing.<<br>>
+
+The eggshells crack underfoot as you continue your trek through the sewer maze.<<br>>
+
+'[[Through here|tmnt3]],' she says.
+
+:: tmnt3 [sbg]
+
+'This is them,' she says. <<br>>
+
+You scan the room. Several young turtles are reclining on trashed sofas and admiring a fashion magazine containing photos of none other than Laura.<<br>>
+
+<img class='tv'  src='./img/hfmag.gif' draggable='false'> <br>
+
+You look at Laura expectantly a [[second time|tmnt4]].
+
+:: tmnt4 [sbg]
+
+Laura explains. 'These turtles have been isolated from human society. They've collected excess merchandise and development builds of video games that [[Kenji Eno's|tmnt5]] company has dumped down the drain.'<<br>>
+
+'Looks like a shrine. Is it more of a worship thing or a mentorship thing?'<<br>>
+
+'I don't know. They also have a strange infatuation with me. You see, I'm not just a news reporter. I'm a digital actress that [[Kenji Eno|tmnt5]] created for his games. And [[Kenji Eno|tmnt5]] also put me in that fashion magazine.'<<br>>
+
+The turtles [[look up.|tmnt5]]<<br>>
+
+:: tmnt5 [sbg]
+
+> did someone say kenji eno, the turtles say<<br>>
+
+> look brah it's laura laura is here  <<br>>
+
+> laura did u bring more kenji eno merch  <<br>>
+
+'No,' she says. 'This is [[Lorenzo|tmnt6]],' Laura says.
+
+
+:: tmnt6 [sbg]
+
+> lorenzo u r a turtle brah <<br>>
+
+'I'm not a turtle,' you say. <<br>>
+
+> ngl bro [[looks like a turtle|tmnt7]]
+
+:: tmnt7 [sbg]
+ 
+yeah brah ur green like a turtle, the turtles say<<br>>
+
+'That's just my uniform,' you say.<<br>>
+
+> yeah but u have shell bro<<br>>
+
+'That's my hardhat.'<<br>>
+
+> but u r [[in the sewers|tmnt8]] with the turtles bro
+
+:: tmnt8 [sbg]
+
+'I guess I am in the sewers,' you admit.<<br>>
+
+> brah [[u r a turtle|tmnt9]] bro 
+
+:: tmnt9 [sbg]
+
+Laura sighs. 'Just humor them,' she whispers.<<br>>
+
+'Okay. Okay. I guess I am a [[turtle|tmnt10]],' you say.<<br>>
+
+:: tmnt10 [sbg]
+
+The juvenile turtles whoop and take down the slightly sultry picture of Laura to reveal a far more disturbing recruitment poster.<<br>>
+
+<img class='tv'  src='./img/yertle.gif' draggable='false'><br>
+
+one of us one of us, the turtles chant<<br>>
+
+[[new turtle in town|tmnt11]] new turtle in town<<br>>
+
+:: tmnt11 [sbg]
+
+> ur goin to meet the turtle king, the turtles say<<br>>
+
+> the turtle king brah<<br>>
+
+> to the turtle king<<br>>
+
+You follow them [[through the sewer maze|tmnt12]].
+
+::  tmnt12  [sbg]
+
+Laura is astounded. 'You managed to accomplish in minutes what I couldn't do in months. They've accepted you as one of their own. Follow them. Tell me everything you learn.'<<br>>
+
+> ngl laura ur same bipedal body plan as new turtle dude <<br>>
+
+> that means u r turtle too laura<<br>>
+
+> so ur going to the turtle king<<br>>
+
+> to the <<fade "turtle king" "turtleking" 1500>> <<br>>
+
+:: turtleking [sbg]
+
+'What is the turtle king?' you ask Laura.<<br>>
+
+'I've never seen it myself, but ... they say that deep in that well reside the turtles' elders. It's so deep and dark that the elders have entirely cut off their younglings from having [[any exposure to human culture|turtleking1a]].'<<br>> 
+
+:: turtleking1a [sbg]
+
+'But several younglings have rebelled. They've formed their own hierarchy. A tower of turtles called the turtle king. Whatever youngling is mature and strong enough to [[climb the turtle king|turtleking2]] is said to become Kenji Eno's lapturtle.'<<br>>
+
+You turn a corner....
+
+:: turtleking2 [sbg]
+
+...and see a [[stack of a thousand turtles|turtleking2a]], rising up to an open manhole cover. Daylight shines down from street level.<<br>>
+
+:: turtleking2a [sbg]
+
+Your stomach turns. Your fear of heights intensifies.<<br>> 
+'You want me to <b>climb</b> that?'<<br>>
+
+> lol no, the turtles laugh<<br>>
+
+> u r going on [[bottom rung|turtleking3]] little bro
+
+
+:: turtleking3 [sbg]
+
+Shocked, you turn on a dime and trip. In one plodding step, the tower of turtles — the turtle king — advances upon you. It rests on your chest like a 1000-foot-tall paperweight.<<br>>
+
+> lorenzo bro u r weakest turtle ive ever seen<<br>>
+
+> and the weak support the strong<<br>>
+
+> do u even eat lettuce bro<<br>>
+
+You [[wheeze|turtleking4]].
+
+:: turtleking4 [sbg]
+
+The turtles continue.<<br>>
+
+> laura is strong laura is best turtle <<br>>
+
+> laura has massive kenji eno energy<<br>>
+
+> climb laura climb<<br>>
+
+
+Laura [[looks at you|turtleking5]].
+
+:: turtleking5  [sbg]
+
+'Climb,' you gasp as your chest caves in. 'Get help. And if I don't make it... tell my brother ... tell my brother ...'<<br>>
+
+'Tell my brother I hope he finds a copy of <b>Spy Lunch</b>.'<<br>>
+
+She nods. She gives a [[speech|turtleking6]].
+
+:: turtleking6  [sbg]
+
+'All right. Listen up, turtles. I think you're a bunch of insufferable, inarticulate, <b>adolescent</b> chauvinists, and you're probably really hurting the poor middle-aged maintenance worker that you're standing on top of.' <<br>>
+
+'But I agree that you should see [[more of the world|turtleking6b]] than your elders dictate.'<<br>>
+
+:: turtleking6b [sbg]
+
+'I know you enjoy Kenji Eno's work because of the shock value and semi-provocative virtual photo shoots.'<<br>> 
+'Your elders say exposure to certain things will damage you. That you're not mentally prepared for it. Maybe. Maybe not. But either way, I think even the most immature engagement with anything is a real expression of the pain, terror, and madness of being human that Kenji Eno tried to express.'<<br>>
+
+The turtles [[contemplate this|turtleking6c]].
+
+:: turtleking6c  [sbg]
+
+They understand, to the extent they can.<<br>>
+
+> go laura<<br>>
+
+> yay laura<<br>>
+
+> [[climb laura climb|turtleking7]]<<br>>
+
+:: turtleking7  [sbg]
+
+Just as Laura is about to start the climb, you notice something stuck in between the two turtles that are on top of you.<<br>>
+It's your lanyard. Your photo ID and city maintenance permit. You'll need it if you ever want to work anywhere ever again.<<br>>
+You [[yank it out|turtleking8]] from between the shells.
+
+:: turtleking8  [sbg]
+
+
+The tower of turtles instantly collapses.<<br>>
+
+> lorenzo broooooo <<br>>
+
+> no brah what ru doing<<br>>
+
+> nooooooooooo<<br>>
+
+A generation of turtles slides into the rushing sewer water, and in turn, into their elders' reservoir, which is [[far deeper and darker|turtleking9]] than you care to think about.
+
+
+:: turtleking9  [sbg]
+
+'Well. I guess that's how it ends.' Laura shudders as she looks into the well. 'Decades of young turtles who will live in the dark. We never should have tried to help. I guess I'll ... I'll go finish my report.'<<br>>
+You feel something strange. Unlike Marco, Laura didn't take things out on you.<<br>>
+Sheepishly, you notice a sewer pipe that you can <<fade "slide up" "realend" 1500>>.
+
+:: realend [nobg]
+
+
+
+
+

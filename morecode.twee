@@ -1,0 +1,179 @@
+
+
+:: custtip [script]
+
+$(document).on('mouseenter', '.bw[title]', function (event) {
+  const el = this;
+  const titleText = el.getAttribute('title');
+  if (!titleText) return;
+
+  // Store and remove native title to disable browser tooltip
+  el.setAttribute('data-title', titleText);
+  el.removeAttribute('title');
+
+  // Create tooltip element
+  const $tooltip = $('<div class="custom-tooltip"></div>')
+    .text(titleText)
+    .appendTo('body');
+
+  function moveTooltip(e) {
+    const tooltipWidth = $tooltip.outerWidth();
+    const tooltipHeight = $tooltip.outerHeight();
+    $tooltip.css({
+      position: 'absolute',
+      left: (e.pageX - tooltipWidth - 15) + 'px',
+      top: (e.pageY - tooltipHeight - 15) + 'px',
+      backgroundColor: 'black',
+      color: 'white',
+      padding: '5px 8px',
+      borderRadius: '4px',
+      fontSize: '0.8em',
+      zIndex: 99999,
+      pointerEvents: 'none',
+      whiteSpace: 'nowrap',
+    });
+  }
+
+  // Initial positioning
+  moveTooltip(event);
+
+  // Update position on mouse move
+  $(document).on('mousemove.customTooltip', moveTooltip);
+
+  // Cleanup on mouseleave
+  $(el).on('mouseleave.customTooltip', function () {
+    $tooltip.remove();
+    $(document).off('mousemove.customTooltip');
+    el.setAttribute('title', el.getAttribute('data-title'));
+    el.removeAttribute('data-title');
+    $(el).off('mouseleave.customTooltip');
+  });
+});
+
+
+:: savetitle [script]
+
+Config.saves.onSave = function (save) {
+    let now = new Date();
+    let dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' }); // e.g., "Sunday"
+    let time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }); // e.g., "10:42 PM"
+    save.title = dayOfWeek + " " + time;
+};
+
+
+:: nodrag [script]
+
+$(document).on(':passagerender', function () {
+	// Prevent image dragging
+	$('img').each(function () {
+		this.setAttribute('draggable', 'false');
+		this.ondragstart = function () { return false; };
+	});
+});
+
+::  boxlimiter [script]
+document.addEventListener('input', function(e) {
+  if (e.target.tagName === 'INPUT') {
+    e.target.value = e.target.value.replace(/[^a-z0-9]/gi, '').slice(0, 5);
+  }
+});
+document.addEventListener('input', function(e) {
+  if (e.target.tagName === 'INPUT') {
+    e.target.value = e.target.value.toUpperCase();
+  }
+});
+
+
+
+:: nosave [script]
+// Disable autosave to prevent automatic restoration
+
+Config.saves.slots = 5;
+
+
+if (sessionStorage.getItem("twine-reload-flag") === "true") {
+    sessionStorage.removeItem("twine-reload-flag");
+    Engine.restart();
+}
+
+window.onbeforeunload = function () {
+    sessionStorage.setItem("twine-reload-flag", "true");
+};
+
+
+
+
+
+:: scripts [script]
+
+
+
+$('#ui-bar').remove();
+$(document.head).find('#style-ui-bar').remove();
+
+Config.passages.nobr = true;
+
+:: fade [script]
+
+// arg0 text, 1 dest, 2 hold time 
+
+Macro.add("fade", {
+	handler() {
+		const text    = this.args[0],
+		      passage = this.args[1],
+		      wait    = this.args[2] || 0,   // black screen wait in ms
+		      dur     = 500,                 // fade duration (ms), always same in/out
+		      e       = document.documentElement;
+
+		if (!text || !passage) {
+			return this.error("Usage: <<fade 'text' 'passage' [wait]>>");
+		}
+
+		// make a link
+		const $link = jQuery("<a/>").wiki(text).addClass("link-fade");
+		$link.on("click", () => {
+			// fade out
+			e.style.transition = `filter ${dur}ms`;
+			e.style.filter = "brightness(0)";
+
+			setTimeout(() => {
+				// wait in black, then switch
+				setTimeout(() => {
+					Engine.play(passage);
+					// fade in
+					setTimeout(() => {
+						e.style.transition = `filter ${dur}ms`;
+						e.style.filter = "brightness(1)";
+					}, 20);
+				}, wait);
+			}, dur);
+		});
+		$(this.output).append($link);
+	}
+});
+
+
+:: linebreak [widget]
+
+<<widget "br">>
+<br><br>
+<</widget>>
+
+:: fakebold [widget]
+
+<<widget "bb">>
+<span style="font-family: Bitcount Prop Double"><<print $args[0]>>
+</span>
+<</widget>>
+
+:: turtcrt [widget]
+
+<<widget "turtcrt">>
+<img class='tv'  src='./img/turtlecrt.gif' draggable='false'> 
+<</widget>>
+
+:: hideback [widget]
+
+<<widget "dohideback">>
+<style>.hideback {display:none}</style> 
+<</widget>>
